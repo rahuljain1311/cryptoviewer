@@ -8,7 +8,8 @@ export function getData (currencyname: string) {
 
     return Model.BTC.findAll({
         where: { type: currencyname },
-        attributes: ['txVolume(USD)', 'price(USD)', 'date']
+        attributes: ['txVolume(USD)', 'price(USD)', 'date'],
+        order: [ ['date', 'DESC'] ]  
     }).then((currencyData: any) => {
 
         currencyData = JSON.parse(JSON.stringify(currencyData));
@@ -28,12 +29,34 @@ export function getRealTimeData (currencyname: string) {
                 
                 const body = JSON.parse(JSONbody);
                 const lastRefreshed = body['Meta Data']['7. Last Refreshed'];
-                resolve(body['Time Series (Digital Currency Intraday)'][lastRefreshed]);
+
+                resolve({
+                    price: body['Time Series (Digital Currency Intraday)'][lastRefreshed]['1a. price (USD)'],
+                    volume: body['Time Series (Digital Currency Intraday)'][lastRefreshed]['2. volume'],
+                    marketCapital: body['Time Series (Digital Currency Intraday)'][lastRefreshed]['3. market cap (USD)'],
+                    currencyCode: body['Meta Data']['2. Digital Currency Code'],
+                    currencyName: body['Meta Data']['3. Digital Currency Name'],
+                    marketCode: body['Meta Data']['4. Market Code'],
+                    marketName: body['Meta Data']['5. Market Name'],
+                    lastRefreshed: lastRefreshed,
+                    lastRefreshedUnit: body['Meta Data']['8. Time Zone']
+                });
             }
         });
     });
 };
 
 export function getAllCurrencies() {
+    
+    const currencies = ['BTC', 'DOGE', 'ETH', 'LTC'];
+    
+    const promises : any = [];
+    _.forEach(currencies, (currency) => {
+        promises.push(getRealTimeData(currency));
+    })
+    return Promise.all(promises).then((allCurrencyData) => {
 
+        console.log('all data = ', allCurrencyData);
+        return allCurrencyData;
+    });
 }
