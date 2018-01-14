@@ -32,5 +32,47 @@ module.exports = [
             //     schema: JoiSchema.symptomsById
             // }
         }
+    },
+    {
+        method: 'GET',
+        path: '/realTimeCryptocurrency/{currencyname}',
+        handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
+
+            // return Promise.all([
+            //     Validate.currencyName(req.params.currencyname)
+            // ]).then(() => {
+
+                reply(Currency.getRealTimeData(req.params.currencyname));
+            // }).catch(() => {
+
+            //     reply(Boom.create(403, FORBIDDEN_MSG));
+            // });
+        },
+        config: {
+            tags: ['api'],
+            // validate: {
+            //     params: JoiSchema.campaignNo
+            // },
+            // response: {
+            //     schema: JoiSchema.symptomsById
+            // }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/allCurrencies',
+        handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
+
+            reply(Currency.getAllCurrencies());
+        },
+        config: {
+            tags: ['api'],
+            // validate: {
+            //     params: JoiSchema.campaignNo
+            // },
+            // response: {
+            //     schema: JoiSchema.symptomsById
+            // }
+        }
     }
 ];
