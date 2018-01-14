@@ -9,7 +9,8 @@ export function getData (currencyname: string) {
     return Model.BTC.findAll({
         where: { type: currencyname },
         attributes: ['txVolume(USD)', 'price(USD)', 'date'],
-        order: [ ['date', 'DESC'] ]  
+        order: [ ['date', 'DESC'] ],
+        limit: 100
     }).then((currencyData: any) => {
 
         currencyData = JSON.parse(JSON.stringify(currencyData));
