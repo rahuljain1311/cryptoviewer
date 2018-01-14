@@ -5,6 +5,7 @@ import Constants from "../helpers/constants";
 const FORBIDDEN_MSG = Constants.FORBIDDEN_MSG;
 import * as Boom from "boom";
 import * as hapi from "hapi";
+import * as _ from 'lodash';
 const JoiSchema = require('../joiSchema/schema');
 
 module.exports = [
@@ -35,18 +36,46 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/lastDayData/{currencyname}',
+        handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
+
+            return Promise.all([
+                Validate.currencyName(req.params.currencyname)
+            ]).then(() => {
+
+                const currency = _.upperCase(req.params.currencyname);
+                reply(Currency.getLastDayData(currency));
+            }).catch(() => {
+
+                reply(Boom.create(403, FORBIDDEN_MSG));
+            });
+        },
+        config: {
+            tags: ['api'],
+            // validate: {
+            //     params: JoiSchema.campaignNo
+            // },
+            // response: {
+            //     schema: JoiSchema.symptomsById
+            // }
+        }
+    },
+    {
+        method: 'GET',
         path: '/realTimeCryptocurrency/{currencyname}',
         handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
 
-            // return Promise.all([
-            //     Validate.currencyName(req.params.currencyname)
-            // ]).then(() => {
+            const currency = _.upperCase(req.params.currencyname);
+            return Promise.all([
+                Validate.currencyName(req.params.currencyname)
+            ]).then(() => {
 
-                reply(Currency.getRealTimeData(req.params.currencyname));
-            // }).catch(() => {
+                const currency = _.upperCase(req.params.currencyname);
+                reply(Currency.getRealTimeData(currency));
+            }).catch(() => {
 
-            //     reply(Boom.create(403, FORBIDDEN_MSG));
-            // });
+                reply(Boom.create(403, FORBIDDEN_MSG));
+            });
         },
         config: {
             tags: ['api'],
