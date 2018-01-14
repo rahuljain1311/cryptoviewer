@@ -18,7 +18,7 @@ const manifest = {
             routes: {
                 log: true,
                 files: {
-                    relativeTo: Path.join(__dirname, 'client/build')
+                    relativeTo: Path.join(__dirname, 'public')
                 }
             }
         }
@@ -59,10 +59,7 @@ const manifest = {
         {
             plugin: require('./src/api/static'),
             options: {
-                select: ['api'],
-                routes: {
-                    prefix: '/static'
-                }
+                select: ['api']
             }
         },
         {
@@ -72,12 +69,6 @@ const manifest = {
                 routes: {
                     prefix: '/api'
                 }
-            }
-        },
-        {
-            plugin: require('./src/api/reactRouter'),
-            options: {
-                select: ['api']
             }
         },
         {

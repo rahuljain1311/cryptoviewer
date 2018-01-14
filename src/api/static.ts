@@ -5,24 +5,15 @@ exports.register = (server: hapi.Server, options: hapi.PluginRegistrationOptions
 
     server.route({
         method: 'GET',
-        path: '/images/{param*}',
+        path: '/{param*}',
         handler: {
             directory: {
-                path: '../images'
+                path: './',
+                redirectToSlash: true,
+                index: true
             }
         }
     });
-    // server.route({
-    //     method: 'GET',
-    //     path: '/{param*}',
-    //     handler: {
-    //         directory: {
-    //             path: './static',
-    //             redirectToSlash: true,
-    //             index: true
-    //         }
-    //     }
-    // });
     next(null, null, undefined);
 };
 
