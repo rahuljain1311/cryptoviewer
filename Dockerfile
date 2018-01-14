@@ -28,4 +28,4 @@ RUN ./node_modules/.bin/bower install --allow-root
 RUN service mysql start && npm run migrate-local
 
 CMD ["service", "mysql", "start"]
-CMD ["npm","run", "local-start"]
+CMD ["npm","run", "start"]
