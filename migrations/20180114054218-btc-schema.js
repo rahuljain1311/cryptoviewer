@@ -49,6 +49,6 @@ module.exports = {
         });
     },
     down: function (queryInterface) {
-        return queryInterface.dropTable('Users');
+        return queryInterface.dropTable('BTCs');
     }
 };

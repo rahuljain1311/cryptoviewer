@@ -4,7 +4,7 @@ module.exports = {
     up: function (queryInterface) {
         
         return queryInterface.sequelize.query(`
-            LOAD DATA LOCAL INFILE "./CSVdata/rjbtc.csv" 
+            LOAD DATA LOCAL INFILE "./CSVdata/btc.csv" 
             INTO TABLE BTCs 
             COLUMNS TERMINATED BY ',' 
             OPTIONALLY ENCLOSED BY '"' 
