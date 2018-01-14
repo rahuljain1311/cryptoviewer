@@ -6,11 +6,11 @@ angular.module('StatsCtrl', []).controller('StatsController', function($scope, $
 
     $scope.myCurrency = UserService.get();
 
-    var myCurrency = "btc";
+    // var myCurrency = UserService.get();
 
-    $http.get('/api/oldCurrencyData/'+ myCurrency).then(function(oldData){
+    $http.get('/api/oldCurrencyData/'+ UserService.get()).then(function(oldData){
             
-        $http.get('/api/lastDayData/'+ myCurrency).then(function(dayData){
+        $http.get('/api/lastDayData/'+ UserService.get()).then(function(dayData){
             $scope.oldData = oldData.data; 
             $scope.dayData = dayData.data.lastDayData; 
             $scope.statsLoadText = 'Data loaded';

@@ -1,6 +1,6 @@
 angular.module('UserService', []).service('UserService', ['$http', function() {
 
-    var data = "btc";
+    var data;
     return {
         // call to get all nerds
         

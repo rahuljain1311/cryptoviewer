@@ -8,28 +8,28 @@
 	<br />
 	{{myCurrency}}
 	<br />
-	
-	<table style="width:50%">
-		<tr align="left">
+
+	<table style="width:50%; float:left">
+		<tr >
 			<th>Date</th>
 			<th>Transaction Volume</th> 
 			<th>Price (USD)</th>
 		</tr>
-		<tr ng-repeat="name in oldData" align="left">
+		<tr ng-repeat="name in oldData" >
 			<td>{{name.date}}</td>
 			<td>{{name['txVolume(USD)']}}</td>
 			<td>{{name['price(USD)']}}</td>
 		</tr>
 	</table>
-
-	<table style="width:50%">
-		<tr align="left">
+	
+	<table style="width:50%; float:left">
+		<tr >
 			<th>Timestamp</th>
 			<th>Price (USD)</th>
 			<th>Volume</th>
 			<th>Market Capital (USD)</th>
 		</tr>
-		<tr ng-repeat="name in dayData" align="left">
+		<tr ng-repeat="name in dayData" >
 			<td>{{name.timeStamp}}</td>
 			<td>{{name.price}}</td>
 			<td>{{name.volume}}</td>
