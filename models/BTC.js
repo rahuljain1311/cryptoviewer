@@ -27,6 +27,9 @@ module.exports = function (sequelize, DataTypes) {
         fees: {
             type: DataTypes.DOUBLE
         },
+        type: {
+            type: DataTypes.STRING
+        }
     });
     return BTC;
 };

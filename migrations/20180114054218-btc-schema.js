@@ -36,6 +36,9 @@ module.exports = {
             fees: {
                 type: Sequelize.DOUBLE
             },
+            type: {
+                type: Sequelize.STRING
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
