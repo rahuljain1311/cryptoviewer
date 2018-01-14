@@ -11,9 +11,10 @@ const JoiSchema = require('../joiSchema/schema');
 module.exports = [
     {
         method: 'GET',
-        path: '/cryptocurrency/{currencyname}',
+        path: '/oldCurrencyData/{currencyname}',
         handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
 
+            req.params.currencyname = _.lowerCase(req.params.currencyname);
             return Promise.all([
                 Validate.currencyName(req.params.currencyname)
             ]).then(() => {
@@ -39,6 +40,7 @@ module.exports = [
         path: '/lastDayData/{currencyname}',
         handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
 
+            req.params.currencyname = _.lowerCase(req.params.currencyname);
             return Promise.all([
                 Validate.currencyName(req.params.currencyname)
             ]).then(() => {
@@ -60,33 +62,33 @@ module.exports = [
             // }
         }
     },
-    {
-        method: 'GET',
-        path: '/realTimeCryptocurrency/{currencyname}',
-        handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
+    // {
+    //     method: 'GET',
+    //     path: '/realTimeCryptocurrency/{currencyname}',
+    //     handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
 
-            const currency = _.upperCase(req.params.currencyname);
-            return Promise.all([
-                Validate.currencyName(req.params.currencyname)
-            ]).then(() => {
+    //         req.params.currencyname = _.lowerCase(req.params.currencyname);
+    //         return Promise.all([
+    //             Validate.currencyName(req.params.currencyname)
+    //         ]).then(() => {
 
-                const currency = _.upperCase(req.params.currencyname);
-                reply(Currency.getRealTimeData(currency));
-            }).catch(() => {
+    //             const currency = _.upperCase(req.params.currencyname);
+    //             reply(Currency.getRealTimeData(currency));
+    //         }).catch(() => {
 
-                reply(Boom.create(403, FORBIDDEN_MSG));
-            });
-        },
-        config: {
-            tags: ['api'],
-            // validate: {
-            //     params: JoiSchema.campaignNo
-            // },
-            // response: {
-            //     schema: JoiSchema.symptomsById
-            // }
-        }
-    },
+    //             reply(Boom.create(403, FORBIDDEN_MSG));
+    //         });
+    //     },
+    //     config: {
+    //         tags: ['api'],
+    //         // validate: {
+    //         //     params: JoiSchema.campaignNo
+    //         // },
+    //         // response: {
+    //         //     schema: JoiSchema.symptomsById
+    //         // }
+    //     }
+    // },
     {
         method: 'GET',
         path: '/allCurrencies',

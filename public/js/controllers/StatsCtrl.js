@@ -1,26 +1,19 @@
-angular.module('StatsCtrl', []).controller('StatsController', function($scope, $http) {
+angular.module('StatsCtrl', []).controller('StatsController', function($scope, $http, UserService) {
 
-    $scope.tagline = 'The square root of life is pi!';	
+    $scope.tagline = 'The square root of life is pi!';
 
-    $http.get('/api/users').then(function(response){ $scope.names = response.data; });
+    $scope.statsLoadText = 'Please wait while we load the data';
 
-    $scope.weekLateCount = function (id) {
-		
-        const days = 7;
-        return $http.get('/api/lateCount/'+ days + '/' + id)
-            .then(function(response){ 
-                $scope.noOfDays = response.data.noOfDays; 
-                $scope.lateCount = response.data.lateCount; 
-            });
-    };
+    $scope.myCurrency = UserService.get();
 
-    $scope.monthLateCount = function (id) {
-		
-        const days = 30;
-        return $http.get('/api/lateCount/'+ days + '/' + id)
-            .then(function(response){ 
-                $scope.noOfDays = response.data.noOfDays; 
-                $scope.lateCount = response.data.lateCount; 
-            });
-    };
+    var myCurrency = "btc";
+
+    $http.get('/api/oldCurrencyData/'+ myCurrency).then(function(oldData){
+            
+        $http.get('/api/lastDayData/'+ myCurrency).then(function(dayData){
+            $scope.oldData = oldData.data; 
+            $scope.dayData = dayData.data.lastDayData; 
+            $scope.statsLoadText = 'Data loaded';
+        });
+    });
 });

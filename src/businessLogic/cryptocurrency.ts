@@ -88,9 +88,8 @@ export function getRealTimeData (currencyname: string) {
 };
 
 export function getAllCurrencies() {
-    
+
     const currencies = ['BTC', 'DOGE', 'ETH', 'LTC'];
-    
     const promises : any = [];
     _.forEach(currencies, (currency) => {
         promises.push(getRealTimeData(currency));
