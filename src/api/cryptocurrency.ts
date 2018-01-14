@@ -1,5 +1,5 @@
 'use strict';
-import * as Campaign from "../businessLogic/campaign";
+import * as Currency from "../businessLogic/cryptocurrency";
 import * as Validate from "../businessLogic/validate";
 import Constants from "../helpers/constants";
 const FORBIDDEN_MSG = Constants.FORBIDDEN_MSG;
@@ -10,19 +10,18 @@ const JoiSchema = require('../joiSchema/schema');
 module.exports = [
     {
         method: 'GET',
-        path: '/campaign/{campaignNo}',
+        path: '/cryptocurrency/{currencyname}',
         handler: ( req: hapi.Request, reply: hapi.ReplyNoContinue ) => {            
 
-            // return Promise.all([
-            //     Validate.campaign(req.params.campaignNo),
-            //     Validate.operational(req.auth.credentials.expiry)
-            // ]).then(() => {
+            return Promise.all([
+                Validate.currencyName(req.params.currencyname)
+            ]).then(() => {
 
-                reply(Campaign.getSymptoms(req.params.campaignNo));
-            // }).catch(() => {
+                reply(Currency.getData(req.params.currencyname));
+            }).catch(() => {
 
-            //     reply(Boom.create(403, FORBIDDEN_MSG));
-            // });
+                reply(Boom.create(403, FORBIDDEN_MSG));
+            });
         },
         config: {
             tags: ['api'],

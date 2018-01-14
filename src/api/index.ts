@@ -3,7 +3,7 @@ import * as hapi from "hapi";
 
 export function register (server: hapi.Server, options: hapi.PluginRegistrationOptions, next: hapi.ServerMethodNext) {
 
-    server.route(require('./campaign'));
+    server.route(require('./cryptocurrency'));
     next(null, null, undefined);
 };
 
