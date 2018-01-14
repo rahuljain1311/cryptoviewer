@@ -1,22 +1,16 @@
 angular.module('UserCtrl', []).controller('UserController', function($scope, $http) {
 
-    $scope.tagline = 'To the moon and back!';	
+    $scope.tagline = 'copyright: CryptoCurrencyWorld';	
 	
-    $scope.deleteUser = function (id) {
+    // $scope.deleteUser = function (id) {
 		
-        return $http.delete('/api/user/'+ id)
-            .then(function(response){ $scope.names = response.data; });
-    };
+    //     return $http.delete('/api/user/'+ id)
+    //         .then(function(response){ $scope.names = response.data; });
+    // };
 
-    $scope.addUser = function () {
-		
-        const name = $scope.user.name;
-        return $http.post('/api/user/'+ name)
-            .then(function(response){ 
-                $scope.names = response.data; 
-                $scope.user.name = '';
-            });
-    };
-
-    $http.get('/api/users').then(function(response){ $scope.names = response.data; });
+    $scope.loadText = 'Please wait while data is being fetched from the external API';
+    $http.get('/api/allCurrencies').then(function(response){ 
+        $scope.names = response.data;
+        $scope.loadText = 'Data Loaded';
+    });
 });

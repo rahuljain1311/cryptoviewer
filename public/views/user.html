@@ -1,18 +1,42 @@
 <div class="jumbotron text-center">
-	<h1>Add or Remove users here</h1>
+	<h1>Crypto Currency World</h1>
+	<h3>List of all currencies is as below: </h3>
 	<br />
 	<br />
-	<ol class="text-left">
+	{{loadText}}
+	<br/>
+
+	<table style="width:100%">
+		<tr align="left">
+			<th>Currency Name</th>
+			<th>Currency Code</th> 
+			<th>Price (USD)</th>
+			<th>Volume</th>
+			<th>Market Capital</th>
+			<th>Last Refreshed (UTC)</th>
+		</tr>
+		<tr ng-repeat="name in names" align="left">
+			<td>{{name.currencyName}}</td>
+			<td>{{name.currencyCode}}</td>
+			<td>{{name.price}}</td>
+			<td>{{name.volume}}</td>
+			<td>{{name.marketCapital}}</td>
+			<td>{{name.lastRefreshed}}</td>
+		</tr>
+	</table>
+	<!-- <button ng-click="deleteUser(name._id)" >Delete me</button> -->
+	<!-- <ol class="text-left">
 		<li ng-repeat="name in names"> {{name}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-			<button ng-click="deleteUser(name._id)" >Delete me</button>
+
+			
 		</li>
 		
 		<br />
-	</ol>
+	</ol> -->
 	<br />
 	<br />
 
-	<input class="form-control" ng-model="user.name">  <button ng-click="addUser()" >Add a user</button>
+	<!-- <input class="form-control" ng-model="user.name">  <button ng-click="addUser()" >Add a user</button> -->
 	<br />
 	<br />
 	<p>{{ tagline }}</p>
