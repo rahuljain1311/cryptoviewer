@@ -1,23 +1,38 @@
 # Crypto
 
-1. `brew install mysql`
+Tech Stack: NodeJS, Angular, Mysql, Hapi, Typescript(Typechecking on BE).
+
+Docker
+1. docker build -t crypto .
+
+2. docker run -p 80:5000 crypto
+
+Website will start at http://localhost
+
+
+Local Development
+
+1. `brew install mysql`. Update your local credentials in config/config.js file under `local` environment
 
 2. install node v6.11.2 (LTS) and npm
 
 3. Clone the repo
 
-5. change directory to client folder. `cd client`, then do `yarn install` and then do `yarn run build-dev`. Change directory back to root `cd ..`.
+4. Login to local mysql server. Create a database named `crypto_values`.
 
-6. Login to local mysql server. Create a database named `crypto_values`. Update the credentials to login into mysql in config/config.js file. Remember not to push this file with your changed password of local mysql server. To achieve this do 
-    git update-index --assume-unchanged config/config.js
+5. npm install
 
-9. yarn install
+6. npm install -g bower
 
-10. `npm run migrate-local`
+7. bower install
 
-11. `npm run local-start` and server will start running on 5000, API documentation on 5001.
+8. `npm run migrate-local`
 
-# Local Development in typescript (BE)
+9. `npm run local-start` and server will start running on 5000, API documentation on 5001.
+
+Website will start at http://localhost:5000
+
+# To check type errors in typescript (BE)
 
 To run Typescript(BE) shell locally use ts-node
 

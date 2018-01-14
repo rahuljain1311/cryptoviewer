@@ -12,7 +12,7 @@ module.exports = {
     },
     "local": {
         "username": "root",
-        "password": "password",
+        "password": "",
         "database": "crypto_values",
         "host": "localhost",
         "dialect": "mysql",
